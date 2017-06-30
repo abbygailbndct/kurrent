@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Hcode Commerce feature.
+ */
+
+include_once 'hcode_commerce.features.inc';

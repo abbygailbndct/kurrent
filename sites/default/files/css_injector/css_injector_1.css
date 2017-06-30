@@ -1,0 +1,21 @@
+#menu-side-menu ul li a:link, a:visited{
+    color: white;
+    border-style: solid;
+    display: inline-block;
+    border-width: thin;
+    background-color: #946947;
+    border-color: #946947;
+    padding-left:30px;
+    padding-right:70px;
+}
+
+ul li.leaf a:link, a:visited{
+    color: white;
+    border-style: solid;
+    display: inline-block;
+    border-width: thin;
+    background-color: #946947;
+    border-color: #946947;
+    padding-left:30px;
+    padding-right:70px;
+}

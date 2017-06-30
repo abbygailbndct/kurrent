@@ -1,0 +1,6 @@
+; $Id: 
+name = H-Code Shortcodes
+description = Shortcodes for H-Code theme
+package = "NikaDevs"
+version = "7.x - 1.0"
+core = 7.x

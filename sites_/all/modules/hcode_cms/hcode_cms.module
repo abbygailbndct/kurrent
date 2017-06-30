@@ -1,0 +1,387 @@
+<?php
+
+function _get_node_field($node, $field, $lang = 'en') {
+  global $language;
+  $var = FALSE;
+  if(!empty($node->{$field}[$lang])) {
+      $var = $node->{$field}[$lang];
+  } elseif(!empty($node->{$field}[$language->language])) {
+      $var = $node->{$field}[$language->language];
+  } elseif(!empty($node->{$field}['und'])) {
+      $var = $node->{$field}['und'];
+  } elseif(!empty($node->{$field})) {
+      $var = $node->{$field};
+  }
+  return $var;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function hcode_cms_init() {
+  if(in_array($_GET['q'], array('cart', 'cart/checkout')) && strpos($_SERVER['HTTP_HOST'], 'nikadevs') !== FALSE) {
+    global $user;
+    if ($product = commerce_product_load(1)) {
+      $line_item = commerce_product_line_item_new($product, 1);
+      drupal_alter('commerce_product_calculate_sell_price_line_item', $line_item);
+      rules_invoke_event('commerce_product_calculate_sell_price', $line_item);
+      $line_item = commerce_cart_product_add($user->uid, $line_item, TRUE);
+    }
+  }
+  global $user;
+  if(variable_get('maintenance_mode', 0) && !$user->uid && !in_array($_GET['q'], array('user', 'user/login'))) {
+    $_GET['q'] = 'maintenance';
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function hcode_cms_menu() {
+  //$node = node_load(193);unset($node->nid, $node->vid, $node->created);node_save($node);
+  $items['page-404'] = array(
+    'title' => 'Page not Found',
+    'page callback' => 'stig_cms_page_404',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function hcode_cms_page_404() {
+  return '';
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function hcode_cms_user_login(&$edit, $account) {
+  $edit['redirect'] = '<front>';
+}
+
+/**
+ * Implements hook_menu().
+ */
+function hcode_cms_block_info() {
+  $blocks = array();
+
+  $blocks['search_with_icon'] = array(
+    'info' => t('Hcode: Search Line field with Icon'),
+    'cache' => DRUPAL_CACHE_PER_PAGE,
+    'region' => 'sidebar',
+    'status' => 0
+  );
+  return $blocks;
+}
+
+/**
+ * Implementation of hook_block_view().
+ */
+function hcode_cms_block_view($delta) {
+  $block = array();
+  switch ($delta) {
+    case 'search_with_icon':
+      $search_form_box = module_invoke('search', 'block_view');
+      $search_form_box['content']['#attributes']['class'] = array('faq-search', 'margin-five', 'no-margin-bottom', 'position-relative');
+      $search_form_box['content']['search_block_form']['#attributes']['class'] = array('input-round', 'big-input', 'no-margin');
+      $search_form_box['content']['search_block_form']['#field_suffix'] = '<i class="fa fa-search faq-search-button"></i>';
+      $search_form_box['content']['actions']['#attributes']['class'] = array('hidden');
+      $block = array(
+        'subject' => '',
+        'content' => $search_form_box
+      );
+      break;
+  }
+  return $block;
+}
+
+function hcode_cms_menu_edit_item_validate($form, &$form_state) {
+  $values = $form_state['values'];
+  if(strpos($values['link_path'], '#') === 0) {
+    $values['link_path'] = str_replace('#', 'http://_anchor_', $values['link_path']);
+    form_set_value(array('#parents' => array('link_path')), $values['link_path'], $form_state);
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function hcode_cms_form_alter(&$form, &$form_state, $form_id) {
+  if(strpos($form_id, 'commerce_cart_add_to_cart_form') !== FALSE) {
+    $form['quantity']['#title_display'] = 'none';
+    $form['quantity']['#attributes']['class'] = array('input-lg', 'round', 'auto-width');
+    $form['quantity']['#attributes']['type'] = 'number';
+  }
+  if ($form['#id'] == 'comment-form') {
+    $form['actions']['submit']['#attributes']['class'][] = 'highlight-button-black-border';
+    $form['actions']['submit']['#attributes']['class'][] = 'btn';
+    $form['actions']['submit']['#attributes']['class'][] = 'btn-small';
+    $form['actions']['submit']['#attributes']['class'][] = 'xs-no-margin-bottom';
+    $form['actions']['submit']['#value'] = t('Leave Comment');
+  }
+  switch ($form_id) {
+    case 'menu_edit_item':
+      if (isset( $form['link_path']['#default_value'])) {
+        $form['link_path']['#default_value'] = str_replace('http://_anchor_', '#', $form['link_path']['#default_value']);
+        array_unshift($form['#validate'], 'hcode_cms_menu_edit_item_validate');        
+      }
+      break;
+    case 'user_pass':
+    case 'user_register_form':
+        $form['#prefix'] = '<section class="bg-gray wow fadeIn">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-8 col-xs-11 center-col xs-no-padding">';
+        $form['#suffix'] = '</div>
+                </div>
+            </div>
+        </section>';
+        $form['actions']['submit']['#attributes']['class'] = array('btn', 'highlight-button-dark', 'btn-small', 'btn-round', 'margin-five', 'no-margin-right');
+        break;
+    case 'user_login':
+      if(arg(0) == 'user') {
+        $form['#prefix'] = '<section class="bg-gray wow fadeIn">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-8 col-xs-11 center-col xs-no-padding">';
+        $form['#suffix'] = '</div>
+                </div>
+            </div>
+        </section>';
+        $form['name']['#title_show'] = t('USERNAME');
+        $form['name']['#title_show'] = TRUE;
+        $form['pass']['#title_show'] = TRUE;
+        unset($form['name']['#description'], $form['pass']['#description']);
+        $form['actions']['submit']['#attributes']['class'] = array('btn', 'highlight-button-dark', 'btn-small', 'btn-round', 'margin-five', 'no-margin-right');
+        $form['actions']['#suffix'] = l(t('Forgot Password?'), 'user/password', array('attributes' => array('class' => array('display-block', 'text-uppercase'))));
+      }
+      break;
+  }
+}
+
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function hcode_cms_field_formatter_info() {
+  return array(
+    'hcode_cms_images_main_small' => array(
+      'label' => t('Hcode: Images One Main'),
+      'field types' => array('image'),
+      'settings'  => array(
+        'image_style_name' => '',
+        'image_style_name_small' => '',
+      ),
+    ),
+    'hcode_cms_social_links' => array(
+      'label' => t('Hcode: Social Links'),
+      'field types' => array('link_field'),
+    ),
+
+    'hcode_cms_images_slider' => array(
+      'label' => t('hcode: Images Slider'),
+      'field types' => array('image'),
+      'settings'  => array(
+        'image_style_name' => '',
+      ),
+    ),
+    'hcode_cms_lead_text' => array(
+      'label' => t('hcode: Lead Text'),
+      'field types' => array('text_long'),
+    ),
+    'hcode_cms_title' => array(
+      'label' => t('hcode: Title'),
+      'field types' => array('text'),
+      'settings'  => array(
+        'tag' => 'h1',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function hcode_cms_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  //This gets the view_mode where our settings are stored
+  $display = $instance['display'][$view_mode];
+  //This gets the actual settings
+  $settings = $display['settings'];
+  switch($display['type']) {
+    case 'hcode_cms_images_main_small':
+      $element = array();
+      $image_styles = array();
+      foreach(image_styles() as $name => $image_style) {
+        $image_styles[$name] = $image_style['label'];
+      }
+      $element['image_style_name'] = array(
+        '#type' => 'select',
+        '#title' => t('Image Style for Main Image'),
+        '#default_value' => $settings['image_style_name'],
+        '#options' => $image_styles
+      );
+      $element['image_style_name_small'] = array(
+        '#type' => 'select',
+        '#title' => t('Image Style for Small Images'),
+        '#default_value' => $settings['image_style_name_small'],
+        '#options' => $image_styles
+      );
+      break;
+    case 'hcode_cms_images_slider':
+      $element = array();
+      $image_styles = array();
+      foreach(image_styles() as $name => $image_style) {
+        $image_styles[$name] = $image_style['label'];
+      }
+      $element['image_style_name'] = array(
+        '#type' => 'select',
+        '#title' => t('Image Style for Main Image'),
+        '#default_value' => $settings['image_style_name'],
+        '#options' => $image_styles
+      );
+      break;
+    case 'hcode_cms_title':
+      $element = array();
+      $tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+      $element['tag'] = array(
+        '#type' => 'select',
+        '#title' => t('Tag'),
+        '#default_value' => $settings['tag'],
+        '#options' => array_combine($tags, $tags)
+      );
+      break;
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function hcode_cms_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  switch($display['type']) {
+    case 'hcode_cms_images_main_small':  
+      $settings = $display['settings'];
+      $image_styles = image_styles();
+      $style_name = isset($image_styles[$settings['image_style_name']]['label']) ? $image_styles[$settings['image_style_name']]['label'] : 'Original';
+      $summary = t('Image size @style.', array(
+        '@style' => $style_name,
+      ));
+      return $summary;
+    case 'hcode_cms_images_slider':  
+      $settings = $display['settings'];
+      $image_styles = image_styles();
+      $style_name = isset($image_styles[$settings['image_style_name']]['label']) ? $image_styles[$settings['image_style_name']]['label'] : 'Original';
+      $summary = t('Image size @style', array(
+        '@style' => $style_name,
+      ));
+      return $summary;
+    case 'hcode_cms_title':  
+      $settings = $display['settings'];
+      $summary = t('Title @tag', array(
+        '@tag' => $settings['tag'],
+      ));
+      return $summary;
+  }
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function hcode_cms_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  if(!count($items)) {
+    return;
+  }
+  switch($display['type']) {
+    case 'hcode_cms_images_main_small':
+      $element = array();
+      $settings = $display['settings'];
+      $image = array_shift($items);
+      $output = '<div class="zoom-gallery sm-margin-bottom-ten">
+        <a href="' . file_create_url($image['uri']) . '">' . theme('image_style', array('style_name' => $settings['image_style_name'], 'path' => $image['uri'])) .'</a>';
+      $output .= '<div class="products-thumb text-center">';
+      foreach ($items as $delta => $item) {
+        $image = theme('image_style', array('style_name' => $settings['image_style_name_small'], 'path' => $item['uri']));
+        $output .= '<a href="' . file_create_url($item['uri']) . '">' . $image . '</a>';
+      }
+      $output .= '</div></div>';
+      $element[0]['#markup'] = $output;
+      return $element;
+    case 'hcode_cms_social_links':
+      $element = array();
+      $output = '<div class = "person-social margin-five no-margin-bottom">';
+      foreach ($items as $delta => $item) {
+        $output .= '<a href="' . $item['url'] . '" target = "_blank"><i class=" ' . $item['title'] . '"></i></a>';
+      }
+      $output .= '</div>';
+      $element[0]['#markup'] = $output;
+      return $element;
+
+    case 'hcode_cms_images_slider':
+      $element = array();
+      $settings = $display['settings'];
+
+      $output = '<ul class="clearlist content-slider mb-40">';
+      foreach ($items as $delta => $item) {
+        $output .= '<li>' . theme('image_style', array('style_name' => $settings['image_style_name'], 'path' => $item['uri'])) . '</li>';
+      }
+      $output .= '</ul>';
+      
+      $element[0]['#markup'] = $output;
+      return $element;
+    case 'hcode_cms_lead_text':
+      $element = array();
+      $output = '';
+      foreach ($items as $delta => $item) {
+        $output .= '<div class = "lead">' . check_markup($item['value'], $item['format']) . '</div>';
+      }
+      
+      $element[0]['#markup'] = $output;
+      return $element;
+    case 'hcode_cms_title':
+      $element = array();
+      $settings = $display['settings'];
+      $output = '';
+      $tag = $settings['tag'];
+      foreach ($items as $delta => $item) {
+        $output .= '<' . $tag . ' class = "mt-0 font-alt">' . (isset($item['format']) && $item['format'] ? check_markup($item['value'], $item['format']) : $item['value']) . '</' . $tag . '>';
+      }
+      
+      $element[0]['#markup'] = $output;
+      return $element;
+  }
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function hcode_cms_theme_registry_alter(&$theme_registry) {
+  //$theme_registry['nikadevs_cms_block_settings']['path'] = drupal_get_path('theme', 'hcode') . '/templates';
+}
+
+function hcode_cms_preprocess_block(&$variables) {
+  $settings = variable_get('nikadevs_cms_block_settings_' . variable_get('theme_default', 'none'), array());
+
+  $variables['title_tag'] = 'h5';
+  $variables['title_type'] = 'widget-title';
+  $variables['title_padding_bottom'] = '';
+  $variables['padding_bottom'] = '';
+  $id = $variables['block']->module . '_' . $variables['block']->delta;
+  if(isset($settings[$id])) {
+    if(isset($settings[$id]['animation_delay']) && !empty($settings[$id]['animation_delay'])) {
+      $variables['attributes_array']['data-wow-duration'] = $settings[$id]['animation'];
+    }
+    if(isset($settings[$id]['animation']) && !empty($settings[$id]['animation'])) {
+      $variables['attributes_array']['class'] = 'wow ' . $settings[$id]['animation'];
+      unset($variables['attributes_array']['data-animation'], $variables['attributes_array']['data-animation-delay']);
+    }
+    if(isset($settings[$id]['padding_bottom']) && $settings[$id]['padding_bottom']) {
+      $variables['classes_array'][] = $settings[$id]['padding_bottom'];
+    }
+    $variables['title_tag'] = isset($settings[$id]['title_tag']) ? $settings[$id]['title_tag'] : $variables['title_tag'];
+    $variables['title_type'] = isset($settings[$id]['title_type']) && $settings[$id]['title_type'] ? $settings[$id]['title_type'] : $variables['title_type'];
+    $variables['padding_bottom'] = isset($settings[$id]['padding_bottom']) && $settings[$id]['padding_bottom'] ? $settings[$id]['padding_bottom'] : $variables['padding_bottom'];
+    $variables['title_padding_bottom'] = isset($settings[$id]['title_padding_bottom']) && $settings[$id]['title_padding_bottom'] ? $settings[$id]['title_padding_bottom'] : $variables['title_padding_bottom'];
+
+  }
+}

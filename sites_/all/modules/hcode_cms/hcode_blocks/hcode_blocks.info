@@ -1,0 +1,8 @@
+name = Hcode Blocks
+description = Blocks for Hcode
+core = 7.x
+package = NikaDevs
+version = 7.x-1.1
+features[blockexport_settings][] = block_settings
+features[features_api][] = api:2
+features_exclude[dependencies][blockexport] = blockexport

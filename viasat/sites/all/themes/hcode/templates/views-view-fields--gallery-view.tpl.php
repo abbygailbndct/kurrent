@@ -1,0 +1,1 @@
+<?php print _views_field($fields, 'field_gallery_image'); ?>

@@ -1,0 +1,74 @@
+name = Hcode
+description = Hcode is Responsive Drupal 7 Theme.
+core = 7.x
+engine = phptemplate
+
+regions[top]                = Top
+regions[content_top]        = Content Top
+regions[content]            = Content
+regions[sidebar]            = Sidebar
+regions[content_full]       = Content Full Width
+regions[bottom]             = Content Bottom
+regions[footer]             = Footer
+
+stylesheets[all][] = css/animate.css
+stylesheets[all][] = css/bootstrap.css
+stylesheets[all][] = css/et-line-icons.css
+stylesheets[all][] = css/extralayers.css
+stylesheets[all][] = css/font-awesome.min.css
+stylesheets[all][] = css/full-slider.css
+stylesheets[all][] = css/magnific-popup.css
+stylesheets[all][] = css/owl.carousel.css
+stylesheets[all][] = css/owl.transitions.css
+stylesheets[all][] = css/settings.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/text-effect.css
+stylesheets[all][] = css/responsive.css
+stylesheets[all][] = css/drupal.css
+
+scripts[] = js/ajax-popup-slider.js
+scripts[] = js/blog-masonry.js
+scripts[] = js/bootstrap.js
+scripts[] = js/bootstrap-hover-dropdown.js
+scripts[] = js/counter.js
+scripts[] = js/imagesloaded.pkgd.min.js
+scripts[] = js/jquery.easing.1.3.js
+scripts[] = js/jquery.easypiechart.js
+scripts[] = js/jquery.fitvids.js
+scripts[] = js/jquery.isotope.min.js
+scripts[] = js/jquery.magnific-popup.min.js
+scripts[] = js/jquery.parallax-1.1.3.js
+scripts[] = js/jquery.revolution.js
+scripts[] = js/jquery.tools.min.js
+scripts[] = js/jquery.viewport.mini.js
+scripts[] = js/modernizr.js
+scripts[] = js/one-page-main.js
+scripts[] = js/owl.carousel.min.js
+scripts[] = js/page-scroll.js
+scripts[] = js/popup-gallery.js
+scripts[] = js/skrollr.min.js
+scripts[] = js/smooth-scroll.js
+scripts[] = js/text-effect.js
+scripts[] = js/wow.min.js
+scripts[] = js/main.js
+scripts[] = js/drupal.js
+scripts[] = js/custom.js
+
+features[] = name
+features[] = logo
+features[] = slogan
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = comment_user_verification
+features[] = favicon
+features[] = main_menu
+
+settings[toggle_name] = 1
+settings[toggle_logo] = 1
+settings[toggle_slogan] = 1
+settings[toggle_main_menu] = 1
+settings[loader_image] = 1
+
+version = "7.x-1.1"
+core = "7.x"
+project = "Hcode"

@@ -1,0 +1,7 @@
+; $Id: 
+name = H-Code theme module
+description = Functions for H-code theme
+package = "NikaDevs"
+version = "7.x - 1.0"
+core = 7.x
+dependencies[] = media_wysiwyg

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Hcode Features feature.
+ */
+
+include_once 'hcode_features.features.inc';
