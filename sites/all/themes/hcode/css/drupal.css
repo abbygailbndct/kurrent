@@ -562,10 +562,26 @@ li.expanded.clicked ul li:nth-child(2) a {
 li.expanded.clicked ul li a {
   color: black !important;
 }
-
-div#Content div#content {
+ul.menu li:hover {
+  background: gray !important;
+  cursor: pointer;
+}
+ul.menu li:hover a {
+  color: white !important;
+}
+li.expanded:hover a {
+  color: black !important;
+}
+li.expanded.clicked {
+  background: gray !important;
+}
+li.expanded.clicked:hover > a {
+  color: white !important;
+}
+div#Content div#content.col-md-6 {
   display: block;
   padding: 0px;
+  background: transparent;
 }
 div#block-block-46 {
   display: block;
@@ -602,21 +618,18 @@ form#views-form-jl-shop-cart-view-block div#edit-actions {
 div#content div.node-page {
   background: rgba(255,255,255,0.5);
   display: block;
-  padding: 10px;
+  padding: 15px;
   position: absolute;
   width: 100%;
   max-width: 100%;
 }
-div#content div.node-page .row {
-  width: 100%;
+div#content div.node-page #block-views-jl-grid-videos-block {
+  background: transparent;
 }
 div#content div.node-page .row > .col-md-3 {
-  width: 29% !important;
-  margin-left: 8px;
+  width: 30% !important;
+  margin-left: 12px;
 }
 div#content div.node-page:before {
   display: table !important;
-}
-.jl-grid-videos.col-sm-3 {
-  width: 25% !important;
 }
