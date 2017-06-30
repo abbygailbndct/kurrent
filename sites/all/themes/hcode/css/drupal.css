@@ -646,3 +646,11 @@ div#content div.node-page .row > .col-md-3 {
 div#content div.node-page:before {
   display: table !important;
 }
+
+/*Removing unwanted elements on logint page*/
+.front div#Content div#content {
+  background: transparent;
+}
+.front #sidebar, .front div#block-block-46, .front div#block-block-41 {
+  display: none;
+}
