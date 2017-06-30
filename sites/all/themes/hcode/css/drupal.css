@@ -654,3 +654,15 @@ div#content div.node-page:before {
 .front #sidebar, .front div#block-block-46, .front div#block-block-41 {
   display: none;
 }
+.front #user-login  input[type='submit'] {
+  font-size: 20px;
+  font-family: initial;
+}
+.front a[href="/user/password"] {
+  font-size: 13px;
+  font-family: initial;
+  margin-top: -15px;
+}
+.front a[href="/user/password"]:hover {
+  text-decoration: underline;
+}
