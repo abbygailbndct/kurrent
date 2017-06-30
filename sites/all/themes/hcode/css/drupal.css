@@ -578,6 +578,19 @@ li.expanded.clicked {
 li.expanded.clicked:hover > a {
   color: white !important;
 }
+div#block-menu-block-1 ul.menu li.expanded:before {
+  background-image: url(../images/sidebar_logo.png);
+  content: " ";
+  position: absolute;
+  left: 15px;
+  width: 19px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  height: 20px;
+  margin-top: 2px;
+}
+
 div#Content div#content.col-md-6 {
   display: block;
   padding: 0px;
