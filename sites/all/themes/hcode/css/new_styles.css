@@ -55,6 +55,10 @@ div#block-menu-block-1 ul.menu li a {
   font-family: initial;
   letter-spacing: 1px;
 }
+div#block-menu-block-1 > h5,
+div#block-menu-block-1 .thin-separator-line {
+  display: none;
+}
 div#content div.node-page .field-name-body {
   display: none;
 }
