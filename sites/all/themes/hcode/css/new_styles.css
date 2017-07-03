@@ -76,7 +76,10 @@ li.expanded.clicked ul li {
 li.expanded.clicked ul li:last-child {
   border-bottom: 2px solid #946947;
 }
-li.expanded.clicked ul li.active-trail a {
+ul li.active-trail {
+  background: white !important;
+}
+ul li.active-trail a {
   color: #946947 !important;
   font-weight: bold;
 }
