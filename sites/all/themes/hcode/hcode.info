@@ -25,6 +25,7 @@ stylesheets[all][] = css/style.css
 stylesheets[all][] = css/text-effect.css
 stylesheets[all][] = css/responsive.css
 stylesheets[all][] = css/drupal.css
+stylesheets[all][] = css/new_styles.css
 
 scripts[] = js/ajax-popup-slider.js
 scripts[] = js/blog-masonry.js
