@@ -194,3 +194,51 @@ div#content div.node-page:before {
 .front a[href="/user/password"]:hover {
   text-decoration: underline;
 }
+
+
+/**
+* Registration form / Page Styles
+*/
+body.page-node-register {
+  background-image: url(../images/bg_front.jpg) !important;
+  background-repeat: no-repeat;
+  background-position: center top;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+body.page-node-register div#sidebar,
+body.page-node-register div#bottom,
+body.page-node-register h2.main_title,
+body.page-node-register .form-item-who-is-registering,
+body.page-node-register .form-item-state,
+div#edit-actions > a,
+body.page-node-register div.field-type-text label {
+  display: none;
+}
+
+body.page-node-register div.field-type-text {
+  text-align: center;
+  margin: 0;
+}
+
+body.page-node-register input {
+  margin-bottom: 5px;
+  border-radius: 4px !important;
+  text-align: left;
+  font-family: initial;
+  color: #946947;
+}
+
+body.page-node-register div#edit-actions {
+  text-align: center;
+}
+
+body.page-node-register div#edit-actions > input {
+  margin: 0;
+  background: #946947;
+  font-family: initial;
+  border-color: #946947;
+  text-align: center;
+  color: white !important;
+}

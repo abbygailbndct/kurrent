@@ -13,5 +13,14 @@
       find.removeClass('col-md-5');
       find.addClass('col-md-6');
     }
+
+    // Adding Placeholders to Custom registration form fields
+    var regForm = $('body').find('form#registration-form');
+    if( regForm.length == 1 ) { // found form
+      $(regForm).find('div.field-type-text').each(function(e) {
+        var label = $(this).find('label').text(); // Gets the label of the input fields.
+        $(this).find('input').attr('placeholder', label);
+      });
+    }
   });
 })(jQuery);
