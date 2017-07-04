@@ -199,6 +199,10 @@ div#content div.node-page:before {
 /**
 * Registration form / Page Styles
 */
+body.page-node-register form#registration-form > div {
+  width: 30%;
+  margin: 0 auto;
+}
 body.page-node-register {
   background-image: url(../images/bg_front.jpg) !important;
   background-repeat: no-repeat;
