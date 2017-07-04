@@ -106,7 +106,8 @@ li.expanded.clicked {
 li.expanded.clicked:hover > a {
   color: white !important;
 }
-div#block-menu-block-1 ul.menu li.expanded:before {
+div#block-menu-block-1 ul.menu li.active-trail:before,
+div#block-menu-block-1 ul.menu li:hover:before {
   background-image: url(../images/sidebar_logo.png);
   content: " ";
   position: absolute;
@@ -234,6 +235,24 @@ body.page-node-register input {
   text-align: left;
   font-family: initial;
   color: #946947;
+  font-weight: bold;
+}
+
+body.page-node-register input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+  font-weight: bold;
+}
+body.page-node-register input::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+  font-weight: bold;
+}
+body.page-node-register input:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+  font-weight: bold;
+}
+body.page-node-register input:-moz-placeholder { /* Firefox 18- */
+  color: black;
+  font-weight: bold;
 }
 
 body.page-node-register div#edit-actions {
