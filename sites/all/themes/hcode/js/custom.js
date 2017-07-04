@@ -21,6 +21,12 @@
         var label = $(this).find('label').text(); // Gets the label of the input fields.
         $(this).find('input').attr('placeholder', label);
       });
+
+      // for Email field.
+      $(regForm).find('input#edit-anon-mail').attr('placeholder', 'Mail');
+
+      // Replace button text
+      $(this).find('input[type="submit"]').attr('value', 'Update Profile');
     }
   });
 })(jQuery);

@@ -217,7 +217,9 @@ body.page-node-register h2.main_title,
 body.page-node-register .form-item-who-is-registering,
 body.page-node-register .form-item-state,
 div#edit-actions > a,
-body.page-node-register div.field-type-text label {
+body.page-node-register div.field-type-text label,
+body.page-node-register div.form-item-anon-mail label,
+body.page-node-register div.form-item-anon-mail div.description {
   display: none;
 }
 
