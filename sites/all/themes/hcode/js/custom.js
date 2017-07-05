@@ -37,5 +37,19 @@
         $(this).find('input').attr('placeholder', label.replace('*', ''));
       });
     }
+
+
+    // Clickable functionality for icons on Header elements
+    $('h2.main_title').find('span.content-display i')
+      .each(function(e) {
+        $(this).on('click', function() {
+          if ($(this).hasClass('fa-list')) {
+            $('div#content div.node-page').html('Boo Ya');
+          }
+          else if ($(this).hasClass('fa-th')) {
+            $('div#content div.node-page').html('Anyeong');
+          }
+        });
+      });
   });
 })(jQuery);
