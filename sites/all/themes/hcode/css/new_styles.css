@@ -9,8 +9,15 @@ div#kurrent_logo {
   margin-bottom: -10px
 }
 div#kurrent_logo img {
-  height: 55px !important;
+  height: 50px !important;
   margin-top: 10px;
+}
+div#content h2.main_title {
+  padding-left: 15px !important;
+}
+
+div#bottom div[style] {
+  padding-left: 15px !important;
 }
 
 /*Admin menu*/
