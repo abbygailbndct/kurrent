@@ -28,5 +28,14 @@
       // Replace button text
       $(this).find('input[type="submit"]').attr('value', 'Update Profile');
     }
+
+    // Adding Placeholders to login fields
+    var LoginForm = $('body').find('form#user-login');
+    if ( LoginForm.length > 0 ) {
+      LoginForm.find('div.form-item').each(function(e) {
+        var label = $(this).find('label').text();
+        $(this).find('input').attr('placeholder', label.replace('*', ''));
+      });
+    }
   });
 })(jQuery);

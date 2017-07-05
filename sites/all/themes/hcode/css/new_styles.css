@@ -81,10 +81,10 @@ li.expanded.clicked ul li:last-child {
   border-bottom: 2px solid #946947;
 }
 ul li.active-trail {
-  background: white !important;
+  background: gray !important;
 }
 ul li.active-trail a {
-  color: #946947 !important;
+  color: white !important;
   font-weight: bold;
 }
 li.expanded.clicked ul li a {
@@ -266,4 +266,47 @@ body.page-node-register div#edit-actions > input {
   border-color: #946947;
   text-align: center;
   color: white !important;
+}
+
+
+/*Login Styles*/
+form#user-login label span.form-required {
+  display: none;
+}
+form#user-login > div {
+  width: 80%;
+  margin: 0 auto;
+}
+form#user-login input {
+  margin-bottom: 5px;
+  border-radius: 4px !important;
+  text-align: left !important;
+  font-family: initial;
+  color: #946947;
+  font-weight: bold;
+}
+form#user-login input[type="submit"] {
+  width: 100% !important;
+  height: 40px;
+  background-color: #95684b;
+  border: 0px;
+  color: white;
+  text-align: center !important;
+  font-size: 14px !important;
+}
+form#user-login input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+  font-weight: bold;
+}
+form#user-login input::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+  font-weight: bold;
+}
+form#user-login input:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+  font-weight: bold;
+}
+form#user-login input:-moz-placeholder { /* Firefox 18- */
+  color: black;
+  font-weight: bold;
 }
