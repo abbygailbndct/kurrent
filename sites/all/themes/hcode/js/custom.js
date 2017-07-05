@@ -26,7 +26,7 @@
       $(regForm).find('input#edit-anon-mail').attr('placeholder', 'Mail');
 
       // Replace button text
-      $(this).find('input[type="submit"]').attr('value', 'Update Profile');
+      $(this).find('input[type="submit"]').attr('value', 'Register');
     }
 
     // Adding Placeholders to login fields

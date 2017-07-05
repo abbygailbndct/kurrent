@@ -119,6 +119,20 @@ li.expanded.clicked {
 li.expanded.clicked:hover > a {
   color: white !important;
 }
+li.expanded ul.menu li:hover {
+  background: #946947 !important;
+  border-top: 2px solid white;
+}
+li.expanded ul.menu li:hover:last-child {
+  border-bottom: 2px solid white;
+}
+li.expanded ul.menu li:hover:before {
+  display: none;
+}
+li.expanded ul.menu li:hover a {
+  color: white !important;
+}
+
 div#block-menu-block-1 ul.menu li.active-trail:before,
 div#block-menu-block-1 ul.menu li:hover:before {
   background-image: url(../images/sidebar_logo.png);
