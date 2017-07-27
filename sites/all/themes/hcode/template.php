@@ -51,7 +51,7 @@ function hcode_preprocess_html(&$variables) {
     $args = arg();
     $get_value = array_pop($args);
   }
-  $skins = array('default', 'blue', 'blue-gray', 'brown', 'cyan', 'green', 'green-light', 'indigo', 'orange', 'orange-deep', 'purple', 'red', 'yellow');  
+  $skins = array('default', 'blue', 'blue-gray', 'brown', 'cyan', 'green', 'green-light', 'indigo', 'orange', 'orange-deep', 'purple', 'red', 'yellow');
   // Allow to override the skin by argument
   $skin = in_array($get_value, $skins) ? $get_value : theme_get_setting('skin');
   if($skin && $skin != 'default') {
@@ -166,7 +166,7 @@ function hcode_status_messages($variables) {
     'status' => 'check-circle-o',
     'error' => 'fa-exclamation-triangle',
     'warning' => 'fa-times-circle',
-  ); 
+  );
   foreach (drupal_get_messages($display) as $type => $messages) {
     $output .= "<div class=\"alert " . $types[$type] . "\">\n<i class=\"fa fa-lg fa-" . $icons[$type] . "\"></i>";
     if (!empty($status_heading[$type])) {
@@ -259,7 +259,7 @@ function aurum_webform_email($variables) {
     }
   }
   _form_set_class($element, array('form-text', 'form-email'));
-  
+
   $output = '<input' . drupal_attributes($element['#attributes']) . ' />';
 
   if(isset($element['#nd_icon'])) {
@@ -426,7 +426,7 @@ function hcode_form_element($variables) {
     $attributes['class'][] = 'form-disabled';
   }
   if(isset($element['#name']) && isset($element['#return_value']) && strpos($element['#name'], 'field_color_attribute') !== FALSE) {
-    $attributes['style']= "background-color: #" . $element['#return_value']; 
+    $attributes['style']= "background-color: #" . $element['#return_value'];
   }
   $output = '<div' . drupal_attributes($attributes) . '>' . "\n";
 
@@ -493,7 +493,7 @@ function stig_textfield($variables) {
     $output = '<div class="input-group">' . $output . '<span class="input-group-addon"><i class = "fa fa-refresh"></i></span></div>';
     $extra = '<input' . drupal_attributes($attributes) . ' />';
   }
-  $output .= $extra; 
+  $output .= $extra;
   if(isset($element['#nd_icon'])) {
     $size_class = in_array('input-lg', $element['#attributes']['class']) ? ' pi-input-with-icon-lg' : '';
     $size_class .= in_array('input-sm', $element['#attributes']['class']) ? ' pi-input-with-icon-sm' : '';

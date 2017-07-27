@@ -228,9 +228,6 @@ div#content div.node-page:before {
 .front div#Content div#content {
   background: transparent;
 }
-.front #sidebar, .front div#block-block-46, .front div#block-block-41 {
-  display: none;
-}
 .front #user-login  input[type='submit'] {
   font-size: 20px;
   font-family: initial;
@@ -248,66 +245,105 @@ div#content div.node-page:before {
 /**
 * Registration form / Page Styles
 */
-body.page-node-register form#registration-form > div {
-  width: 30%;
+body.page-user-register form#user-register-form > div {
   margin: 0 auto;
+  padding: 0 50px;
 }
-body.page-node-register {
+body.page-user-register {
   background-image: url(../images/bg_front.jpg) !important;
   background-repeat: no-repeat;
   background-position: center top;
   -webkit-background-size: cover;
   background-size: cover;
 }
+body.page-user-register #user-register-form .form-type-password > div {
+  width: 100%;
+}
+body.page-user-register #user-register-form .form-type-password {
+  width: 100%;
+}
 
-body.page-node-register div#sidebar,
-body.page-node-register div#bottom,
-body.page-node-register h2.main_title,
-body.page-node-register .form-item-who-is-registering,
-body.page-node-register .form-item-state,
-div#edit-actions > a,
-body.page-node-register div.field-type-text label,
-body.page-node-register div.form-item-anon-mail label,
-body.page-node-register div.form-item-anon-mail div.description {
+body.page-user-register #user-register-form .password-strength,
+body.page-user-register .form-item-pass-pass2 > div.password-confirm {
   display: none;
 }
 
-body.page-node-register div.field-type-text {
+body.page-user-register .password-suggestions.description {
+  width: 100%;
+  max-width: 100%;
+}
+
+body.page-user-register div#sidebar,
+body.page-user-register div#bottom,
+body.page-user-register h2.main_title,
+body.page-user-register .form-item-who-is-registering,
+body.page-user-register .form-item-state,
+div#edit-actions > a,
+body.page-user-register div.field-type-text label,
+body.page-user-register div.form-item-anon-mail label,
+body.page-user-register div.form-item-anon-mail div.description {
+  display: none;
+}
+
+body.page-user-register div.field-type-text {
   text-align: center;
   margin: 0;
 }
 
-body.page-node-register input {
+body.page-user-register input {
   margin-bottom: 5px;
   border-radius: 4px !important;
   text-align: left;
   font-family: initial;
   color: #946947;
   font-weight: bold;
+  width: 100%;
 }
 
-body.page-node-register input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: black;
+body.page-user-register .form-item label,
+body.page-user-register .form-item .description {
+  display: none;
+}
+
+/* User password suggestion field styles */
+body.page-user-register .form-item.form-group.no-margin-bottom.form-type-password-confirm.form-item-pass {
+  position: relative;
+}
+body.page-user-register .password-suggestions.description {
+  position: absolute;
+  left: -105%;
+  top: -10px;
+  border-radius: 5px;
+  color: white;
+  background: #946947;
+  font-size: 12px;
+}
+body.page-user-register .password-suggestions.description ul {
+  list-style-type: disc;
+  padding-left: 22px;
+}
+body.page-user-register input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: gray;
   font-weight: bold;
 }
-body.page-node-register input::-moz-placeholder { /* Firefox 19+ */
-  color: black;
+body.page-user-register input::-moz-placeholder { /* Firefox 19+ */
+  color: gray;
   font-weight: bold;
 }
-body.page-node-register input:-ms-input-placeholder { /* IE 10+ */
-  color: black;
+body.page-user-register input:-ms-input-placeholder { /* IE 10+ */
+  color: gray;
   font-weight: bold;
 }
-body.page-node-register input:-moz-placeholder { /* Firefox 18- */
+body.page-user-register input:-moz-placeholder { /* Firefox 18- */
   color: black;
   font-weight: bold;
 }
 
-body.page-node-register div#edit-actions {
+body.page-user-register div#edit-actions {
   text-align: center;
 }
 
-body.page-node-register div#edit-actions > input {
+body.page-user-register div#edit-actions > input {
   margin: 0;
   background: #946947;
   font-family: initial;
@@ -357,4 +393,98 @@ form#user-login input:-ms-input-placeholder { /* IE 10+ */
 form#user-login input:-moz-placeholder { /* Firefox 18- */
   color: black;
   font-weight: bold;
+}
+
+body.page-video-and-contents-all #content h5.font-alt.mb-sm-40.widget-title {
+  width: 100%;
+  height: 28px;
+  background-color: #946947;
+  padding-left: 15px;
+  font-family: 'Bree Serif', serif;
+  font-size: 22px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+body.page-video-and-contents-all #content .thin-separator-line,
+body.page-video-and-contents-all #content div#block-views-jl-video-lists-block .thin-separator-line,
+body.page-video-and-contents-all #content div#block-views-jl-video-lists-block h5.font-alt.mb-sm-40.widget-title{
+  display: none;
+}
+
+body.page-video-and-contents-all #content .right-icons {
+  float: right;
+  margin-right: 8px;
+  position: relative;
+  bottom: 2.5px;
+}
+body.page-video-and-contents-all #content .right-icons i {
+  background: white;
+  border-radius: 20px;
+  padding: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #946947;
+}
+body.page-video-and-contents-all #content .right-icons i:hover,
+body.page-video-and-contents-all #content .right-icons .fa.active {
+  background: #946947;
+  color: white;
+}
+
+/* Grid display for Video and contents */
+body.page-video-and-contents-all #content .region-content > .view {
+  padding: 20px;
+}
+body.page-video-and-contents-all #content .view .view-content .col-md-4 {
+  width: 32.5%;
+}
+body.page-video-and-contents-all #content .view .view-content .col-md-4.col-2 {
+  margin: auto 7px;
+}
+body.page-video-and-contents-all #content .view .view-content .col-md-4:nth-child(even) {
+  background-color: #946947;
+}
+body.page-video-and-contents-all #content .view .view-content .col-md-4:nth-child(even):hover {
+  background-color: gray;
+}
+body.page-video-and-contents-all #content .vid_title {
+  font-family: initial;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* List Display for View and Contents */
+body.page-video-and-contents-all #content #lists_video_block {
+  font-family: initial;
+}
+
+body.page-video-and-contents-all #content #lists_video_block .contextual-links-wrapper {
+  display: none;
+}
+body.page-video-and-contents-all #content #lists_video_block th.views-field.views-field-title {
+  font-size: 10px !important;
+  font-weight: normal !important;
+}
+body.page-video-and-contents-all #content #lists_video_block table {
+  padding-top: 0px !important;
+}
+body.page-video-and-contents-all #content #lists_video_block table th {
+  padding: 0px 5px !important;
+}
+body.page-video-and-contents-all #content #lists_video_block table td {
+  padding: 5px !important;
+  vertical-align: top;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+/* Style overrides */
+.container-fluid {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+div#sidebar, div#bottom {
+  padding: 0px 8px;
 }
